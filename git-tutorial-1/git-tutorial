@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  
+      <title>To do list Version1</title>
+
+  // <link rel = "stylesheet"
+      href = "styles/11-todo-list.css">
+     </href=>  
+
+     //<link rel = "stylesheet"
+      href = "scripts/11-Todo List.js">
+    //</href=>
+
+ </head>
+    <body>
+      <p>Todo List Version11</p>
+
+    <div class="todo-input-grid">
+      <input placeholder="Todo number">
+
+      <input placeholder="Todo name"
+      class="js-name-input name-input">
+     <input type="date"
+      class="js-due-date-input due-date-input">
+    <button onclick="
+      addTodo(); 
+    " class="add-todo-button">Add</button> 
+      </div>
+
+   <div class="js-todo-list todo-grid"></div>
+
+<style>
+
+body {
+  font-family:  sans-serif;
+}
+
+.todo-grid,
+.todo-input-grid {
+  display: grid;
+  grid-template-columns: 200px 150px 100px;
+  column-gap: 10px;
+  row-gap: 10px;
+  align-items: center;
+}
+
+.todo-input-grid {
+  margin-bottom: 10px;
+  align-items: stretch;
+}
+
+.name-input,
+.due-date-input {
+  font-size: 15px;
+  padding: 6px;
+}
+
+.add-todo-button {
+  background-color: green;
+  color: white;
+  border: none;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+.delete-todo-button {
+  background-color: darkred;
+  color: white;
+  border: none;
+  font-size: 15px;
+  cursor: pointer;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+
+</style>
+    
+<script>
+
+  const  todoList = [{
+    name: 'walk dogs',
+    dueDate: '2024-03-31'
+    }, {
+    name: 'groom dogs',
+    dueDate: '2024-03-15'
+}];
+
+renderTodoList();
+
+function renderTodoList() {
+  let todoListHTML = '';
+
+for (let i = 0; i < todoList.length; i++) {
+  const todoObject = todoList[i]; 
+  const name = todoObject.name;
+  const dueDate = todoObject.dueDate;
+  const html = `
+    <div>${name}</div>
+    <div>${dueDate}</div>
+
+    <button class="delete-todo-button js-delete-todo-button">Delete</button>
+      `;
+
+  todoListHTML += html;
+
+}
+
+document.querySelector('.js-todo-list')
+.innerHTML = todoListHTML;
+
+
+
+
+}
+
+function addTodo() {
+  const inputElement = document.querySelector('.js-name-input');
+  const name = inputElement.value;
+
+  const dateInputElement = document.querySelector 
+  ('.js-due-date-input');
+  const dueDate = dateInputElement.value;
+
+  todoList.push({
+
+    // name;
+
+    name,
+    dueDate
+  });
+
+  inputElement.value = '';
+
+  renderTodoList();
+  
+}
+</script>  
+    <!-- Code injected by live-server -->
+<script>
+	// <![CDATA[  <-- For SVG support
+	if ('WebSocket' in window) {
+		(function () {
+			function refreshCSS() {
+				var sheets = [].slice.call(document.getElementsByTagName("link"));
+				var head = document.getElementsByTagName("head")[0];
+				for (var i = 0; i < sheets.length; ++i) {
+					var elem = sheets[i];
+					var parent = elem.parentElement || head;
+					parent.removeChild(elem);
+					var rel = elem.rel;
+					if (elem.href && typeof rel != "string" || rel.length == 0 || rel.toLowerCase() == "stylesheet") {
+						var url = elem.href.replace(/(&|\?)_cacheOverride=\d+/, '');
+						elem.href = url + (url.indexOf('?') >= 0 ? '&' : '?') + '_cacheOverride=' + (new Date().valueOf());
+					}
+					parent.appendChild(elem);
+				}
+			}
+			var protocol = window.location.protocol === 'http:' ? 'ws://' : 'wss://';
+			var address = protocol + window.location.host + window.location.pathname + '/ws';
+			var socket = new WebSocket(address);
+			socket.onmessage = function (msg) {
+				if (msg.data == 'reload') window.location.reload();
+				else if (msg.data == 'refreshcss') refreshCSS();
+			};
+			if (sessionStorage && !sessionStorage.getItem('IsThisFirstTime_Log_From_LiveServer')) {
+				console.log('Live reload enabled.');
+				sessionStorage.setItem('IsThisFirstTime_Log_From_LiveServer', true);
+			}
+		})();
+	}
+	else {
+		console.error('Upgrade your browser. This Browser is NOT supported WebSocket for Live-Reloading.');
+	}
+	// ]]>
+</script>
+</body>
+  </html>
+  
+  
+ 
+
+
+
+
+
